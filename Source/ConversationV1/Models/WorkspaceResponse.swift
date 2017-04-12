@@ -24,7 +24,7 @@ public struct WorkspaceResponse: JSONDecodable, JSONEncodable {
     public let name: String
 
     /// The description of the workspace.
-    public let description: String
+    public let description: String?
 
     /// The language of the workspace.
     public let language: String
@@ -68,7 +68,7 @@ public struct WorkspaceResponse: JSONDecodable, JSONEncodable {
     /// Used internally to initialize a `WorkspaceResponse` model from JSON.
     public init(json: JSON) throws {
         name = try json.getString(at: "name")
-        description = try json.getString(at: "description")
+        description = try? json.getString(at: "description")
         language = try json.getString(at: "language")
         metadata = try json.getJSON(at: "metadata")
         created = try json.getString(at: "created")
